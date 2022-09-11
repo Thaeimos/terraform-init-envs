@@ -5,7 +5,7 @@ It will automatically create an .auto.tfvars files.
 
 ## Usage
 
-Start up the [utilities](../../../utilities/docker-image-bins/) docker image (which has already a section to properly configure your secrets), move into the "backends" directory and create a "terraform.tfvars" using "terraform.tfvars.example" as an example. The contents should be like:
+Start up the [utilities](./utilities/docker-image-bins/) docker image (which has already a section to properly configure your secrets), move into the "backends" directory and create a "terraform.tfvars" using "terraform.tfvars.example" as an example. The contents should be like:
 
 ```bash
 environments         = ["dev","prod"]
