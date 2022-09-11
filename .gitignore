@@ -32,3 +32,6 @@ override.tf.json
 
 # Exclude environments folder
 environments/*
+
+# Excluse secrets files
+*.secrets
