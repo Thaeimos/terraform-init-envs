@@ -28,6 +28,13 @@ terraform apply
 The module will create buckets to store Terraform's remote configuration of each environment. Obviously, the state that is used to create those buckets is **local**.
 You should have an "environments" folder with separated directories for each defined area, and a bucket for each environment, with prepopulated configurations that will store the remote state of each environment in the buckets created to do so.
 
+Once you want to initialize any of the environments, traverse to it's folder and do the following commands:
+```bash
+cd environments/dev
+terraform init -backend-config backend.tfvars
+terraform apply
+```
+
 ## TODO
 - Make the files created work correctly and automatically
 - Make it work with GCP
