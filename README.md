@@ -36,7 +36,6 @@ terraform apply
 ```
 
 ## TODO
-- Make the files created work correctly and automatically
 - Make it work with GCP
 - Complete utilities
 - Create global variables and links to each environment
