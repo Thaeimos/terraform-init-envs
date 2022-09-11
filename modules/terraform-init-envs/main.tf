@@ -46,11 +46,10 @@ resource "aws_dynamodb_table" "terraform" {
 }
 
 resource "local_file" "backend_file" {
-  filename          = "../environments/${var.environment}/backend.auto.tfvars"
+  filename          = "../environments/${var.environment}/backend.tfvars"
   file_permission   = "0644"
   content           = <<-EOT
     bucket                = "${aws_s3_bucket.backend.bucket}"
-    key                   = "${var.environment}/terraform.tfstate"
     dynamodb_table        = "${aws_dynamodb_table.terraform.name}"
     encrypt               = true
     region                = "${var.region}"
@@ -81,6 +80,15 @@ resource "local_file" "main_file" {
       region  = var.region
     }
 
+    resource "aws_vpc" "my_vpc" {
+      cidr_block = "172.16.0.0/16"
+
+      tags = {
+        Name = "$${var.name}"
+      }
+    }
+
+
   EOT
 }
 
@@ -94,15 +102,11 @@ resource "local_file" "vars_file" {
       default     = "${var.region}"
     }
 
+    variable "name" {
+      type        = string
+      description = "Suffix name for all the entities to create."
+      default     = "${var.s3_bucket_prefix}"
+    }
+
   EOT
 }
-
-# Create global vars - We need this to happen just once
-# resource "local_file" "global_vars_file" {
-#   filename          = "../global_variables.tf"
-#   file_permission   = "0644"
-#   content           = <<-EOT
-#     # Empty so far
-
-#   EOT
-# }
