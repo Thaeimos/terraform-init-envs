@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 # Common packages
 RUN apt-get update
-RUN apt-get install -y apt-transport-https ca-certificates curl gnupg apt-utils python3 
+RUN apt-get install -y apt-transport-https ca-certificates curl gnupg apt-utils python3 git
 
 # Kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
