@@ -53,6 +53,7 @@ resource "local_file" "backend_file" {
     dynamodb_table        = "${aws_dynamodb_table.terraform.name}"
     encrypt               = true
     region                = "${var.region}"
+    key                   = "terraform"
   EOT
 }
 
