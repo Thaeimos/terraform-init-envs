@@ -38,4 +38,4 @@ terraform apply
 ## TODO
 - Make it work with GCP
 - Complete utilities
-- Create global variables and links to each environment
+- Copy utilities on module invokation
