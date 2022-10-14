@@ -58,7 +58,7 @@ resource "local_file" "backend_file" {
 }
 
 resource "local_file" "main_file" {
-  filename          = "./environments/${var.environment}/main.tf"
+  filename          = "./environments/${var.environment}/provider.tf"
   file_permission   = "0644"
   content           = <<-EOT
     terraform {
@@ -66,21 +66,43 @@ resource "local_file" "main_file" {
       required_providers {
         aws = {
           source  = "hashicorp/aws"
-          version = ">= 4.0"
+          version = "~> 4.31.0"
+        }
+        template = {
+          source  = "hashicorp/template"
+          version = "~> 2.2.0"
+        }
+        random = {
+          source  = "hashicorp/random"
+          version = "~> 3.4.3"
         }
       }
     }
 
-    # The backend config variables come from a backend.auto.tfvars file
+    # The backend config variables come from a backend.tfvars file
     terraform {
       backend "s3" {
       }
     }
 
     provider "aws" {
-      region  = var.region
+      region = var.region
+
+      default_tags {
+        tags = {
+          purpose     = var.name
+          environment = var.environment
+        }
+      }
     }
 
+  EOT
+}
+
+resource "local_file" "main_file" {
+  filename          = "./environments/${var.environment}/main.tf"
+  file_permission   = "0644"
+  content           = <<-EOT
     resource "aws_vpc" "my_vpc" {
       cidr_block = "172.16.0.0/16"
 
@@ -88,7 +110,6 @@ resource "local_file" "main_file" {
         Name = "$${var.name}"
       }
     }
-
 
   EOT
 }
