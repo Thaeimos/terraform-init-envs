@@ -1,11 +1,11 @@
 # terraform-init-envs
 
 Terraform module to create the (Opinionated) directory structure for a project and create the backends to store the Terraform state and lock.
-It will automatically create an .auto.tfvars files.
+
 
 ## Usage
 
-Start up the [utilities](utilities/docker-image-bins/) docker image (which has already a section to properly configure your secrets), move into the "backends" directory and create a "terraform.tfvars" using "terraform.tfvars.example" as an example. The contents should be like:
+Start up the [utilities](utilities/docker-image-bins/) docker image (which has already a section to properly configure your secrets), move into the "examples" (Or any other) directory and create a "terraform.tfvars" using "terraform.tfvars.example" as an example. The contents should be like:
 
 ```bash
 environments         = ["dev","prod"]
@@ -20,7 +20,7 @@ We favour the usage of ".tfvars" files and it's reflected in the code.
 After you are done with this, issue the following command inside the "backends" directory:
 
 ```bash
-cd backends
+cd examples
 terraform init
 terraform apply
 ```
