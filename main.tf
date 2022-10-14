@@ -95,7 +95,6 @@ resource "local_file" "main_file" {
         }
       }
     }
-
   EOT
 }
 
@@ -110,7 +109,6 @@ resource "local_file" "main_file" {
         Name = "$${var.name}"
       }
     }
-
   EOT
 }
 
@@ -130,6 +128,11 @@ resource "local_file" "vars_file" {
       default     = "${var.s3_bucket_prefix}"
     }
 
+    variable "environment" {
+      type        = string
+      description = "The environment we are at."
+      default     = "${var.environment}"
+    }
   EOT
 }
 
