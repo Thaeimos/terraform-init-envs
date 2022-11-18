@@ -57,7 +57,7 @@ resource "local_file" "backend_file" {
   EOT
 }
 
-resource "local_file" "main_file" {
+resource "local_file" "provider_file" {
   filename          = "./environments/${var.environment}/provider.tf"
   file_permission   = "0644"
   content           = <<-EOT
