@@ -43,3 +43,4 @@ terraform apply
 - Revisit the versioning of the module and increase it
 - Folder structure
 - Keep naming consistent with S3 and DynamoDB
+- DynamoDB region placement
