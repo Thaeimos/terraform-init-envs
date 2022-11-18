@@ -42,3 +42,4 @@ terraform apply
 - Use only one var for the names of DynamoDB and the bucket
 - Revisit the versioning of the module and increase it
 - Folder structure
+- Keep naming consistent with S3 and DynamoDB
