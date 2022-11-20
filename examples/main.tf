@@ -18,7 +18,7 @@ provider "aws" {
 
 module "init-environments" {
   for_each              = toset(var.list_environments)
-  source                = "github.com/Thaeimos/terraform-init-envs.git?ref=v1.0.0"
+  source                = "github.com/Thaeimos/terraform-init-envs.git?ref=v1.1.1"
   environment           = each.value
   s3_dyn_name           = var.s3_dyn_name
   bucket_sse_algorithm  = var.bucket_sse_algorithm
