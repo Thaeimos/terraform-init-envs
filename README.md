@@ -39,6 +39,5 @@ terraform apply
 - Make it work with GCP
 - Complete utilities
 - Copy utilities on module invokation
-- Revisit the versioning of the module and increase it
 - DynamoDB region placement
 - Create tfvars.example file
