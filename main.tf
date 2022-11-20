@@ -125,7 +125,7 @@ resource "local_file" "vars_file" {
     variable "name" {
       type        = string
       description = "Suffix name for all the entities to create."
-      default     = "${var.s3_bucket_prefix}"
+      default     = "${var.s3_dyn_name}"
     }
 
     variable "environment" {
