@@ -4,18 +4,8 @@ variable "environment" {
   nullable    = false
 }
 
-variable "s3_bucket_prefix" {
-  description = "S3 bucket for terraform state."
-  type        = string
-}
-
-variable "s3_bucket_name" {
-  description = "'Name' tag for S3 bucket with terraform state."
-  type        = string
-}
-
-variable "dynamodb_table" {
-  description = "DynamoDB table name for terraform lock."
+variable "s3_dyn_name" {
+  description = "S3 bucket and DynamoDB prefix for names and other attributes."
   type        = string
 }
 

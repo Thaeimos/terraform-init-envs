@@ -1,9 +1,9 @@
 
 resource "aws_s3_bucket" "backend" {
-  bucket    = "${var.s3_bucket_prefix}-${var.environment}-tfstate"
+  bucket    = "${var.s3_dyn_name}-${var.environment}-tfstate"
 
   tags = {
-    Name        = "${var.s3_bucket_name}"
+    Name        = "${var.s3_dyn_name}"
     Environment = "${var.environment}"
   }
   force_destroy = true
@@ -34,7 +34,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "backend" {
 }
 
 resource "aws_dynamodb_table" "terraform" {
-  name           = "${var.environment}-${var.dynamodb_table}"
+  name           = "${var.s3_dyn_name}-${var.environment}"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"
@@ -46,7 +46,7 @@ resource "aws_dynamodb_table" "terraform" {
 }
 
 resource "local_file" "backend_file" {
-  filename          = "./environments/${var.environment}/backend.tfvars"
+  filename          = "./${var.environment}/backend.tfvars"
   file_permission   = "0644"
   content           = <<-EOT
     bucket                = "${aws_s3_bucket.backend.bucket}"
@@ -58,7 +58,7 @@ resource "local_file" "backend_file" {
 }
 
 resource "local_file" "provider_file" {
-  filename          = "./environments/${var.environment}/provider.tf"
+  filename          = "./${var.environment}/provider.tf"
   file_permission   = "0644"
   content           = <<-EOT
     terraform {
@@ -99,7 +99,7 @@ resource "local_file" "provider_file" {
 }
 
 resource "local_file" "main_file" {
-  filename          = "./environments/${var.environment}/main.tf"
+  filename          = "./${var.environment}/main.tf"
   file_permission   = "0644"
   content           = <<-EOT
     resource "aws_vpc" "my_vpc" {
@@ -113,7 +113,7 @@ resource "local_file" "main_file" {
 }
 
 resource "local_file" "vars_file" {
-  filename          = "./environments/${var.environment}/variables.tf"
+  filename          = "./${var.environment}/variables.tf"
   file_permission   = "0644"
   content           = <<-EOT
     variable "region" {

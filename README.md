@@ -39,8 +39,6 @@ terraform apply
 - Make it work with GCP
 - Complete utilities
 - Copy utilities on module invokation
-- Use only one var for the names of DynamoDB and the bucket
 - Revisit the versioning of the module and increase it
-- Folder structure
-- Keep naming consistent with S3 and DynamoDB
 - DynamoDB region placement
+- Create tfvars.example file
