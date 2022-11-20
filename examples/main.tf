@@ -12,6 +12,10 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "${var.region}"
+}
+
 module "init-environments" {
   for_each              = toset(var.list_environments)
   source                = "github.com/Thaeimos/terraform-init-envs.git?ref=v1.0.0"
