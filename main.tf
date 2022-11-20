@@ -136,3 +136,12 @@ resource "local_file" "vars_file" {
   EOT
 }
 
+resource "local_file" "terra_tfvars_file" {
+  filename          = "./${var.environment}/terraform.tfvars"
+  file_permission   = "0644"
+  content           = <<-EOT
+    name                  = "${var.s3_dyn_name}"
+    region                = "${var.region}"
+    environment           = "${var.environment}"
+  EOT
+}
