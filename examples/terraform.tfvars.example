@@ -1,3 +1,3 @@
-environments         = ["dev","test","prod"]
+list_environments    = ["dev","test","prod"]
 s3_dyn_name          = "awesome-name"
 bucket_sse_algorithm = "AES256"

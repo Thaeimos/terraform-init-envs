@@ -1,6 +1,6 @@
-variable "environment" {
-  description = "Single environment."
-  type        = string
+variable "list_environments" {
+  description = "List of environments."
+  type        = list
   nullable    = false
 }
 

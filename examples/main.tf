@@ -13,7 +13,7 @@ terraform {
 }
 
 module "init-environments" {
-  for_each              = toset(var.environments)
+  for_each              = toset(var.list_environments)
   source                = "github.com/Thaeimos/terraform-init-envs.git?ref=v1.0.0"
   environment           = each.value
   s3_dyn_name           = var.s3_dyn_name
