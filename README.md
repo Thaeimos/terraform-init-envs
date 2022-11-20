@@ -41,3 +41,4 @@ terraform apply
 - Copy utilities on module invokation
 - DynamoDB region placement
 - Create tfvars.example file
+- Reference versions using parameter for files creation
