@@ -17,16 +17,17 @@ bucket_sse_algorithm = "AES256"
 
 We favour the usage of ".tfvars" files and it's reflected in the code.
 
-After you are done with this, issue the following command inside the "backends" directory:
+After you are done with this, issue the following command where the previous files are:
 
 ```bash
 cd examples
+export AWS_DEFAULT_REGION="eu-east-7" # Needed for DynamoDB
 terraform init
 terraform apply
 ```
 
 The module will create buckets to store Terraform's remote configuration of each environment. Obviously, the state that is used to create those buckets is **local**.
-You should have an "environments" folder with separated directories for each defined area, and a bucket for each environment, with prepopulated configurations that will store the remote state of each environment in the buckets created to do so.
+You should have a folder with separated directories for each defined area, and a bucket for each environment, with prepopulated configurations that will store the remote state of each environment in the buckets created to do so.
 
 Once you want to initialize any of the environments, traverse to it's folder and do the following commands:
 ```bash
@@ -40,5 +41,4 @@ terraform apply
 - Complete utilities
 - Copy utilities on module invokation
 - DynamoDB region placement
-- Create tfvars.example file
 - Reference versions using parameter for files creation
