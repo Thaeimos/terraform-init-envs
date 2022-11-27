@@ -1,6 +1,11 @@
 
+resource "random_string" "random" {
+  length           = 6
+  special          = false
+}
+
 resource "aws_s3_bucket" "backend" {
-  bucket    = "${var.s3_dyn_name}-${var.environment}-tfstate"
+  bucket    = "${var.s3_dyn_name}-${var.environment}-${random_string.random}-tfstate"
 
   tags = {
     Name        = "${var.s3_dyn_name}"
