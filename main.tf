@@ -1,11 +1,12 @@
 
 resource "random_string" "random" {
-  length           = 6
-  special          = false
+  length  = 6
+  special = false
+  upper   = false
 }
 
 resource "aws_s3_bucket" "backend" {
-  bucket    = "${var.s3_dyn_name}-${var.environment}-${random_string.random.result}-tfstate"
+  bucket = "${var.s3_dyn_name}-${var.environment}-${random_string.random.result}-tfstate"
 
   tags = {
     Name        = "${var.s3_dyn_name}"
@@ -16,12 +17,12 @@ resource "aws_s3_bucket" "backend" {
 }
 
 resource "aws_s3_bucket_acl" "backend" {
-  bucket    = aws_s3_bucket.backend.id
-  acl       = "private"
+  bucket = aws_s3_bucket.backend.id
+  acl    = "private"
 }
 
-  resource "aws_s3_bucket_versioning" "backend" {
-  bucket    = aws_s3_bucket.backend.id
+resource "aws_s3_bucket_versioning" "backend" {
+  bucket = aws_s3_bucket.backend.id
 
   versioning_configuration {
     status = "Enabled"
@@ -29,7 +30,7 @@ resource "aws_s3_bucket_acl" "backend" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "backend" {
-  bucket    = aws_s3_bucket.backend.id
+  bucket = aws_s3_bucket.backend.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -51,9 +52,9 @@ resource "aws_dynamodb_table" "terraform" {
 }
 
 resource "local_file" "backend_file" {
-  filename          = "./${var.environment}/backend.tfvars"
-  file_permission   = "0644"
-  content           = <<-EOT
+  filename        = "./${var.environment}/backend.tfvars"
+  file_permission = "0644"
+  content         = <<-EOT
     bucket                = "${aws_s3_bucket.backend.bucket}"
     dynamodb_table        = "${aws_dynamodb_table.terraform.name}"
     encrypt               = true
@@ -63,9 +64,9 @@ resource "local_file" "backend_file" {
 }
 
 resource "local_file" "provider_file" {
-  filename          = "./${var.environment}/provider.tf"
-  file_permission   = "0644"
-  content           = <<-EOT
+  filename        = "./${var.environment}/provider.tf"
+  file_permission = "0644"
+  content         = <<-EOT
     terraform {
       required_version = "~> 1.1.7"
       required_providers {
@@ -104,9 +105,9 @@ resource "local_file" "provider_file" {
 }
 
 resource "local_file" "main_file" {
-  filename          = "./${var.environment}/main.tf"
-  file_permission   = "0644"
-  content           = <<-EOT
+  filename        = "./${var.environment}/main.tf"
+  file_permission = "0644"
+  content         = <<-EOT
     resource "aws_vpc" "my_vpc" {
       cidr_block = "172.16.0.0/16"
 
@@ -118,9 +119,9 @@ resource "local_file" "main_file" {
 }
 
 resource "local_file" "vars_file" {
-  filename          = "./${var.environment}/variables.tf"
-  file_permission   = "0644"
-  content           = <<-EOT
+  filename        = "./${var.environment}/variables.tf"
+  file_permission = "0644"
+  content         = <<-EOT
     variable "region" {
       type        = string
       description = "Currently mono region. Region where to deploy."
@@ -142,9 +143,9 @@ resource "local_file" "vars_file" {
 }
 
 resource "local_file" "terra_tfvars_file" {
-  filename          = "./${var.environment}/terraform.tfvars"
-  file_permission   = "0644"
-  content           = <<-EOT
+  filename        = "./${var.environment}/terraform.tfvars"
+  file_permission = "0644"
+  content         = <<-EOT
     name                  = "${var.s3_dyn_name}"
     region                = "${var.region}"
     environment           = "${var.environment}"
