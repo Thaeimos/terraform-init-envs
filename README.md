@@ -8,11 +8,10 @@ Terraform module to create the (Opinionated) directory structure for a project a
 Start up the [utilities](utilities/docker-image-bins/) docker image (which has already a section to properly configure your secrets), move into the "examples" (Or any other) directory and create a "terraform.tfvars" using "terraform.tfvars.example" as an example. The contents should be like:
 
 ```bash
-environments         = ["dev","prod"]
-s3_bucket_prefix     = "com.example"
-s3_bucket_name       = "Dev Terraform State Store"
-dynamodb_table       = "terraform_dev"
-bucket_sse_algorithm = "AES256"
+list_environments       = ["dev","test","prod"]
+s3_dyn_name             = "awesome-name"
+bucket_sse_algorithm    = "AES256"
+region                  = "eu-east-1"
 ```
 
 We favour the usage of ".tfvars" files and it's reflected in the code.
