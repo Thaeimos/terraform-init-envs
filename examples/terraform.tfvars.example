@@ -1,4 +1,7 @@
-list_environments       = ["dev","test","prod"]
-s3_dyn_name             = "awesome-name"
-bucket_sse_algorithm    = "AES256"
-region                  = "eu-east-1"
+list_environments = {
+  "dev"  = { "name" : "dev", "region" : "us-east-1" },
+  "test" = { "name" : "test", "region" : "us-west-1" }
+}
+s3_dyn_name          = "awesome-name"
+bucket_sse_algorithm = "AES256"
+region_provider      = "eu-west-2"

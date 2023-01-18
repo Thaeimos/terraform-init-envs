@@ -13,13 +13,15 @@ terraform {
 }
 
 provider "aws" {
-  region = "${var.region}"
+  region = var.region_provider
 }
 
 module "init-environments" {
-  for_each              = toset(var.list_environments)
-  source                = "github.com/Thaeimos/terraform-init-envs.git?ref=v1.1.4"
-  environment           = each.value
-  s3_dyn_name           = var.s3_dyn_name
-  bucket_sse_algorithm  = var.bucket_sse_algorithm
+  for_each             = var.list_environments
+  source               = "github.com/Thaeimos/terraform-init-envs.git"
+  environment          = each.value["name"]
+  s3_dyn_name          = var.s3_dyn_name
+  bucket_sse_algorithm = var.bucket_sse_algorithm
+  region_resources     = each.value["region"]
+  region_backend       = var.region_provider
 }

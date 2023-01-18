@@ -1,6 +1,9 @@
 variable "list_environments" {
   description = "List of environments."
-  type        = list
+  type        = map(object({
+    name   = string
+    region = string
+  }))
   nullable    = false
 }
 
@@ -15,8 +18,7 @@ variable "bucket_sse_algorithm" {
   default     = "AES256"
 }
 
-variable "region" {
+variable "region_provider" {
   type        = string
   description = "Currently mono region. Region where to deploy."
-  default     = "eu-west-2"
 }
