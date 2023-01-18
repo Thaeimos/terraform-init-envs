@@ -15,7 +15,12 @@ variable "bucket_sse_algorithm" {
   default     = "AES256"
 }
 
-variable "region" {
+variable "region_backend" {
   type        = string
-  description = "Region where to deploy."
+  description = "Region where to create the S3 bucket and the DynamoDB."
+}
+
+variable "region_resources" {
+  type        = string
+  description = "Region where the resources will be created."
 }

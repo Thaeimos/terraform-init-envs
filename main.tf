@@ -58,7 +58,7 @@ resource "local_file" "backend_file" {
     bucket                = "${aws_s3_bucket.backend.bucket}"
     dynamodb_table        = "${aws_dynamodb_table.terraform.name}"
     encrypt               = true
-    region                = "${var.region}"
+    region                = "${var.region_backend}"
     key                   = "terraform"
   EOT
 }
@@ -92,7 +92,7 @@ resource "local_file" "provider_file" {
     }
 
     provider "aws" {
-      region = var.region
+      region = var.region_resources
 
       default_tags {
         tags = {
@@ -133,7 +133,7 @@ resource "local_file" "vars_file" {
     variable "region" {
       type        = string
       description = "Region where to deploy."
-      default     = "${var.region}"
+      default     = "${var.region_resources}"
     }
 
     variable "name" {
@@ -159,7 +159,7 @@ resource "local_file" "terra_tfvars_file" {
   file_permission = "0644"
   content         = <<-EOT
     name                  = "${var.s3_dyn_name}"
-    region                = "${var.region}"
+    region                = "${var.region_resources}"
     environment           = "${var.environment}"
   EOT
 
