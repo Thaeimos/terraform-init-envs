@@ -102,6 +102,10 @@ resource "local_file" "provider_file" {
       }
     }
   EOT
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 resource "local_file" "main_file" {
@@ -116,6 +120,10 @@ resource "local_file" "main_file" {
       }
     }
   EOT
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 resource "local_file" "vars_file" {
@@ -124,7 +132,7 @@ resource "local_file" "vars_file" {
   content         = <<-EOT
     variable "region" {
       type        = string
-      description = "Currently mono region. Region where to deploy."
+      description = "Region where to deploy."
       default     = "${var.region}"
     }
 
@@ -140,6 +148,10 @@ resource "local_file" "vars_file" {
       default     = "${var.environment}"
     }
   EOT
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 resource "local_file" "terra_tfvars_file" {
@@ -150,4 +162,8 @@ resource "local_file" "terra_tfvars_file" {
     region                = "${var.region}"
     environment           = "${var.environment}"
   EOT
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
