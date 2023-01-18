@@ -17,6 +17,5 @@ variable "bucket_sse_algorithm" {
 
 variable "region" {
   type        = string
-  description = "Currently mono region. Region where to deploy."
-  default     = "eu-west-2"
+  description = "Region where to deploy."
 }
