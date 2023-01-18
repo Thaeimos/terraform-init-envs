@@ -52,7 +52,7 @@ resource "aws_dynamodb_table" "terraform" {
 }
 
 resource "local_file" "backend_file" {
-  filename        = "./${var.environment}/backend.tfvars"
+  filename        = "../${var.environment}/backend.tfvars"
   file_permission = "0644"
   content         = <<-EOT
     bucket                = "${aws_s3_bucket.backend.bucket}"
@@ -64,7 +64,7 @@ resource "local_file" "backend_file" {
 }
 
 resource "local_file" "provider_file" {
-  filename        = "./${var.environment}/provider.tf"
+  filename        = "../${var.environment}/provider.tf"
   file_permission = "0644"
   content         = <<-EOT
     terraform {
@@ -105,7 +105,7 @@ resource "local_file" "provider_file" {
 }
 
 resource "local_file" "main_file" {
-  filename        = "./${var.environment}/main.tf"
+  filename        = "../${var.environment}/main.tf"
   file_permission = "0644"
   content         = <<-EOT
     resource "aws_vpc" "my_vpc" {
@@ -119,7 +119,7 @@ resource "local_file" "main_file" {
 }
 
 resource "local_file" "vars_file" {
-  filename        = "./${var.environment}/variables.tf"
+  filename        = "../${var.environment}/variables.tf"
   file_permission = "0644"
   content         = <<-EOT
     variable "region" {
@@ -143,7 +143,7 @@ resource "local_file" "vars_file" {
 }
 
 resource "local_file" "terra_tfvars_file" {
-  filename        = "./${var.environment}/terraform.tfvars"
+  filename        = "../${var.environment}/terraform.tfvars"
   file_permission = "0644"
   content         = <<-EOT
     name                  = "${var.s3_dyn_name}"
