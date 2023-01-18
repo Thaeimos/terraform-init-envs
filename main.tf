@@ -92,7 +92,7 @@ resource "local_file" "provider_file" {
     }
 
     provider "aws" {
-      region = var.region_resources
+      region = var.region
 
       default_tags {
         tags = {
