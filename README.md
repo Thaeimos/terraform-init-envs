@@ -19,10 +19,19 @@ We favour the usage of ".tfvars" files and it's reflected in the code.
 After you are done with this, issue the following command where the previous files are:
 
 ```bash
-cd examples
-export AWS_DEFAULT_REGION="eu-east-7" # Needed for DynamoDB
+cd backend-init-envs/
 terraform init
 terraform apply
+```
+
+The directory structure we follow is something like this:
+```bash
+tree -d
+    .
+    ├── backend-init-envs
+    ├── dev
+    └── test
+
 ```
 
 The module will create buckets to store Terraform's remote configuration of each environment. Obviously, the state that is used to create those buckets is **local**.
@@ -30,7 +39,7 @@ You should have a folder with separated directories for each defined area, and a
 
 Once you want to initialize any of the environments, traverse to it's folder and do the following commands:
 ```bash
-cd environments/dev
+cd ../dev
 terraform init -backend-config backend.tfvars
 terraform apply
 ```
