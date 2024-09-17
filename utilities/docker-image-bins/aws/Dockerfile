@@ -33,6 +33,12 @@ RUN unzip terraform_${TF_VERSION}_linux_$(dpkg --print-architecture).zip
 RUN mv terraform /usr/local/bin/
 RUN echo 'complete -C /usr/local/bin/terraform terraform' >> /root/.bashrc
 
+# Terragrunt
+RUN wget -qO /usr/local/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v0.67.6/terragrunt_linux_amd64
+RUN chmod a+x /usr/local/bin/terragrunt
+RUN terragrunt --install-autocomplete
+RUN echo 'alias tg="terragrunt"' >> ~/.bashrc
+
 # AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 RUN unzip awscliv2.zip
