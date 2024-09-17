@@ -11,7 +11,7 @@ DOCKER_BUILDKIT=1 docker build -t aws-cli:v0 .
 docker run -it aws-cli:v0
 # Mount the contents of the repo inside the docker running process
 cd ~/your-repo-folder
-docker run --mount type=bind,source="$(pwd)",target=/home/aws-terra -w /home/aws-terra -p 8080:8080 --name aws-docker-bins --rm -it aws-cli:v0
+docker run --mount type=bind,source="$(pwd)",target=/home/aws-terra -p 8080:8080 --name aws-docker-bins --rm -it aws-cli:v0
 ```
 
 # Test all is OK
